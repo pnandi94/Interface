@@ -10,5 +10,7 @@ namespace Interface
     {
         void Nyert();
         void Veszitett();
+        int NyertDB { get; }
+        int VeszitettDB { get; }
     }
 }

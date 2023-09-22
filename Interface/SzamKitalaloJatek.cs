@@ -9,7 +9,7 @@ namespace Interface
     public class SzamKitalaloJatek
     {
         private const int MAX_VERSENYZO = 5;
-        private ITippelo[] versenyzok = new ITippelo[MAX_VERSENYZO];
+        public ITippelo[] versenyzok = new ITippelo[MAX_VERSENYZO];
         private int versenyzoN;
         private int alsoHatar;
         private int felsoHatar;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Interface
 {
-    class EmberiJatekos : IOkosTippelo
+    class EmberiJatekos : IOkosTippelo, IJatekos
     {
         public void JatekIndul(int alsoHatar, int felsoHatar)
         {
@@ -31,13 +31,19 @@ namespace Interface
             return tipp;
         }
 
+
+        public int NyertDB { get; private set; }
+        public int VeszitettDB { get; private set; }
+
         public void Nyert()
         {
+            NyertDB++;
             Console.WriteLine("*Nyertél!");
         }
 
         public void Veszitett()
         {
+            VeszitettDB++;
             Console.WriteLine("*Veszítettél!");
         }
     }
