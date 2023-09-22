@@ -48,7 +48,7 @@ namespace Interface
                 }
             }
 
-            Console.WriteLine("A cél száma: " + cel);
+            //Console.WriteLine("A cél száma: " + cel);
         }
 
         public bool MindenkiTippel()
@@ -109,11 +109,25 @@ namespace Interface
                 foreach (ITippelo gyoztes in gyoztesek)
                 {
                     Console.WriteLine(gyoztes.GetType().Name);
+                    Console.WriteLine("A cél száma: " + cel);
                 }
             }
-            else
+        }
+        public void Statisztika(int korokSzama)
+        {
+            for (int i = 0; i < korokSzama; i++)
             {
-                Console.WriteLine("Nincs győztes. Senki sem találta el a célt.");
+                Jatek();
+            }
+
+            Console.WriteLine("Statisztika:");
+            foreach (var versenyzo in versenyzok)
+            {
+                if (versenyzo is IStatisztikatSzolgaltat)
+                {
+                    var statisztikaVersenyzo = (IStatisztikatSzolgaltat)versenyzo;
+                    Console.WriteLine($"{versenyzo.GetType().Name} - Nyert: {statisztikaVersenyzo.HanyszorNyert}, Vesztett: {statisztikaVersenyzo.HanyszorVesztett}");
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Interface;
 using System;
+using System.Diagnostics;
 
 class Program
 {
@@ -14,6 +15,15 @@ class Program
         jatek.VersenyzoFelvetele(bejaroTippelo);
         jatek.VersenyzoFelvetele(logaritmikusKereso);
 
+        //Teszt(jatek);
+        jatek.Statisztika(100);
+
+    }
+
+    static void Teszt(SzamKitalaloJatek jatek)
+    {
+        EmberiJatekos emberiJatekos = new EmberiJatekos();
+        jatek.VersenyzoFelvetele(emberiJatekos);
         jatek.Jatek();
     }
 }

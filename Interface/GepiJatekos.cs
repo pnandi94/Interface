@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Interface
 {
-    public abstract class GepiJatekos : ITippelo
+    public abstract class GepiJatekos : ITippelo, IStatisztikatSzolgaltat
     {
         protected int alsoHatar;
         protected int felsoHatar;
         protected int nyertDB;
         protected int veszitettDB;
+
+        public int HanyszorNyert { get; private set; }
+        public int HanyszorVesztett { get; private set; }
 
         public GepiJatekos()
         {
@@ -21,11 +24,13 @@ namespace Interface
 
         public void Nyert()
         {
+            HanyszorNyert++;
             nyertDB++;
         }
 
         public void Veszitett()
         {
+            HanyszorVesztett++;
             veszitettDB++;
         }
 
