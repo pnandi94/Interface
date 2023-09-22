@@ -15,9 +15,8 @@ class Program
         jatek.VersenyzoFelvetele(bejaroTippelo);
         jatek.VersenyzoFelvetele(logaritmikusKereso);
 
-        //Teszt(jatek);
-        jatek.Statisztika(100);
-
+        Teszt(jatek);
+        //jatek.Statisztika(100);
     }
 
     static void Teszt(SzamKitalaloJatek jatek)
