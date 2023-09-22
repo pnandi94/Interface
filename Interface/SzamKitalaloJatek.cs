@@ -11,7 +11,7 @@ namespace Interface
         private const int MAX_VERSENYZO = 5;
         private ITippelo[] versenyzok = new ITippelo[MAX_VERSENYZO];
         private int versenyzoN;
-        private int cel;
+        public int cel;
 
         public SzamKitalaloJatek(int alsoHatar, int felsoHatar)
         {
@@ -51,6 +51,7 @@ namespace Interface
                 if (jatekos != null)
                 {
                     int tipp = jatekos.KovetkezoTipp();
+                    Console.WriteLine($"{jatekos.GetType().Name} tippelt: {tipp}");
                     if (tipp == cel)
                     {
                         jatekos.Nyert();

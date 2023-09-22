@@ -10,8 +10,8 @@ namespace Interface
     {
         protected int alsoHatar;
         protected int felsoHatar;
-        protected int nyertDB;
-        protected int veszitettDB;
+        public int nyertDB;
+        public int veszitettDB;
 
         public GepiJatekos()
         {
