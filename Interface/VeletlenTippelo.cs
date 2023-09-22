@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace Interface
 {
-    public class VeletlenTippelo : GepiJatekos
+    class VeletlenTippelo : GepiJatekos
     {
-        private Random random = new Random();
+        private Random random;
+
+        public VeletlenTippelo()
+        {
+            random = new Random();
+        }
 
         public override int KovetkezoTipp()
         {

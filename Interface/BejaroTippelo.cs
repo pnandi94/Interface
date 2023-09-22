@@ -6,23 +6,19 @@ using System.Threading.Tasks;
 
 namespace Interface
 {
-    public class BejaroTippelo : GepiJatekos
+    class BejaroTippelo : GepiJatekos
     {
         private int aktualis;
 
-        public BejaroTippelo()
-        {
-            aktualis = 10;
-        }
-
         public override int KovetkezoTipp()
         {
-            aktualis++;
-            if (aktualis > felsoHatar)
-            {
-                aktualis = alsoHatar;
-            }
-            return aktualis;
+            return aktualis++;
+        }
+
+        public new void JatekIndul(int alsoHatar, int felsoHatar)
+        {
+            base.JatekIndul(alsoHatar, felsoHatar);
+            aktualis = alsoHatar;
         }
     }
 }

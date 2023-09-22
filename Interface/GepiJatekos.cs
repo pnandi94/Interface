@@ -10,19 +10,13 @@ namespace Interface
     {
         protected int alsoHatar;
         protected int felsoHatar;
-        public int nyertDB;
-        public int veszitettDB;
+        protected int nyertDB;
+        protected int veszitettDB;
 
         public GepiJatekos()
         {
             nyertDB = 0;
             veszitettDB = 0;
-        }
-
-        public void JatekIndul(int alsoHatar, int felsoHatar)
-        {
-            this.alsoHatar = alsoHatar;
-            this.felsoHatar = felsoHatar;
         }
 
         public void Nyert()
@@ -36,5 +30,20 @@ namespace Interface
         }
 
         public abstract int KovetkezoTipp();
+        public void JatekIndul(int alsoHatar, int felsoHatar)
+        {
+            this.alsoHatar = alsoHatar;
+            this.felsoHatar = felsoHatar;
+        }
+
+        public int NyertDB
+        {
+            get { return nyertDB; }
+        }
+
+        public int VeszitettDB
+        {
+            get { return veszitettDB; }
+        }
     }
 }

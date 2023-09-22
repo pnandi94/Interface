@@ -11,20 +11,23 @@ namespace Interface
         private const int MAX_VERSENYZO = 5;
         private ITippelo[] versenyzok = new ITippelo[MAX_VERSENYZO];
         private int versenyzoN;
+        private int alsoHatar;
+        private int felsoHatar;
         public int cel;
 
         public SzamKitalaloJatek(int alsoHatar, int felsoHatar)
         {
-            this.cel = new Random().Next(alsoHatar, felsoHatar + 1);
+            this.versenyzok = new ITippelo[MAX_VERSENYZO];
             this.versenyzoN = 0;
+            this.alsoHatar = alsoHatar;
+            this.felsoHatar = felsoHatar;
         }
 
         public void VersenyzoFelvetele(ITippelo jatekos)
         {
             if (versenyzoN < MAX_VERSENYZO)
             {
-                versenyzok[versenyzoN] = jatekos;
-                versenyzoN++;
+                versenyzok[versenyzoN++] = jatekos;
             }
             else
             {
@@ -34,13 +37,18 @@ namespace Interface
 
         public void VersenyIndul()
         {
+            Random random = new Random();
+            cel = random.Next(alsoHatar, felsoHatar + 1);
+
             foreach (ITippelo jatekos in versenyzok)
             {
                 if (jatekos != null)
                 {
-                    jatekos.JatekIndul(cel - 1, cel + 1);
+                    jatekos.JatekIndul(alsoHatar, felsoHatar);
                 }
             }
+
+            Console.WriteLine("A cél száma: " + cel);
         }
 
         public bool MindenkiTippel()
@@ -51,36 +59,62 @@ namespace Interface
                 if (jatekos != null)
                 {
                     int tipp = jatekos.KovetkezoTipp();
-                    Console.WriteLine($"{jatekos.GetType().Name} tippelt: {tipp}");
                     if (tipp == cel)
                     {
                         jatekos.Nyert();
                         vanNyertes = true;
                     }
-                }
-            }
-
-            if (vanNyertes)
-            {
-                foreach (ITippelo jatekos in versenyzok)
-                {
-                    if (jatekos != null)
+                    else if (jatekos is IOkosTippelo)
                     {
-                        if (jatekos.KovetkezoTipp() != cel)
+                        if (tipp < cel)
                         {
-                            jatekos.Veszitett();
+                            ((IOkosTippelo)jatekos).Nagyobb();
+                        }
+                        else
+                        {
+                            ((IOkosTippelo)jatekos).Kisebb();
                         }
                     }
+                    Console.WriteLine($"{jatekos.GetType().Name} tippje: {tipp}");
                 }
             }
-
             return vanNyertes;
         }
 
         public void Jatek()
         {
             VersenyIndul();
-            while (!MindenkiTippel()) { }
+            bool jatekVege = false;
+
+            while (!jatekVege)
+            {
+                jatekVege = MindenkiTippel();
+            }
+
+            List<ITippelo> gyoztesek = new List<ITippelo>();
+            foreach (ITippelo versenyzo in versenyzok)
+            {
+                if (versenyzo != null && versenyzo is GepiJatekos)
+                {
+                    GepiJatekos gepiJatekos = (GepiJatekos)versenyzo;
+                    if (gepiJatekos.NyertDB > 0)
+                    {
+                        gyoztesek.Add(gepiJatekos);
+                    }
+                }
+            }
+            if (gyoztesek.Count > 0)
+            {
+                Console.WriteLine("Győztes(ek):");
+                foreach (ITippelo gyoztes in gyoztesek)
+                {
+                    Console.WriteLine(gyoztes.GetType().Name);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Nincs győztes. Senki sem találta el a célt.");
+            }
         }
     }
 }
